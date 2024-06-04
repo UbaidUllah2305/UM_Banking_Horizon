@@ -20,11 +20,14 @@ import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { getLoggedInUser, signIn, signUp } from "@/lib/actions/user.actions";
+// import { signIn, signUp } from "@/lib/actions/user.actions";
 
 const AuthForm = ({ type }: { type: string }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [IsLoading, setIsLoading] = useState(false);
+  // const loggedInUser = await getLoggedInUser()
 
   const formSchema = authFormSchema(type);
 
@@ -43,11 +46,11 @@ const AuthForm = ({ type }: { type: string }) => {
     try {
 
       if(type === 'sign-up'){
-        // const newUser = await signUp(data);
-        // setUser(newUser);
+        const newUser = await signUp(data);
+        setUser(newUser); 
       }
       if(type === 'sign-in'){
-        // const response = await SignIn({
+        // const response = await signIn({
         //   email: data.email,
         //   password: data.password,
         // })
@@ -60,6 +63,12 @@ const AuthForm = ({ type }: { type: string }) => {
       setIsLoading(false);      
     }
   }
+
+  // function onSubmit(values: z.infer<typeof formSchema>){
+  //   setIsLoading(true)
+  //   console.log(values)
+  //   setIsLoading(false)
+  // }
   return (
     <section className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
@@ -76,7 +85,7 @@ const AuthForm = ({ type }: { type: string }) => {
         </Link>
         <div className="flex flex-col gap-1 md:gap-3">
           <h1 className="text-24 lg:text-36 font-semibold text-gray-900">
-            {user ? "Link Account" : type === "sign-in" ? "Sign In" : "Sign Up"}
+            {user ? 'Link Account' : type === "sign-in" ? "Sign In" : "Sign Up"}
 
             <p className="text-16 font-normal text-gray-600">
               {user
