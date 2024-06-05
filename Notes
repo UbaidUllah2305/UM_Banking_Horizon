@@ -5,3 +5,4 @@
 5- Appwrite (Backend => Add Authentication, Databases, Functions, Storage)
 6- PLAID Dwolla (Use Dwolla with Plaid Auth to send and receive payments)
 7- Sentry (To check and record video of user movement in site)
+8- PLAID (middle man between bank and user)
